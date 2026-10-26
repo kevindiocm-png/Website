@@ -1,0 +1,6 @@
+{
+  "name": "Kevin 88 Computer - Spesialis Sparepart Laptop",
+  "description": "Toko spesialis sparepart laptop terlengkap sejak 2014. Menyediakan baterai, charger, keyboard, LCD/LED, RAM, SSD, dan fan laptop bergaransi dengan konsultasi gratis dan jaringan cabang di berbagai kota.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

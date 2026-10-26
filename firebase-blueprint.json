@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile authenticated via Firebase Auth Google Sign-in",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique user ID (auth UID)" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User full name" },
+        "photoURL": { "type": "string", "description": "User avatar photo URL" },
+        "role": { "type": "string", "enum": ["admin", "customer"], "description": "Access control role" },
+        "phoneNumber": { "type": "string", "description": "User WhatsApp / phone number" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp created" }
+      },
+      "required": ["id", "email", "role"]
+    },
+    "OrderInvoice": {
+      "title": "OrderInvoice",
+      "description": "Customer sparepart order and generated warranty invoice",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Invoice number, e.g. INV-2026-XXXX" },
+        "userId": { "type": "string", "description": "User ID of customer if logged in, or guest id" },
+        "customerName": { "type": "string", "description": "Customer full name" },
+        "customerPhone": { "type": "string", "description": "Customer WhatsApp contact" },
+        "customerEmail": { "type": "string", "description": "Customer email" },
+        "customerCity": { "type": "string", "description": "City for delivery" },
+        "shippingAddress": { "type": "string", "description": "Complete delivery address" },
+        "shippingMethod": { "type": "string", "description": "Shipping courier or pickup" },
+        "paymentMethod": { "type": "string", "description": "Selected payment method (qris, bca, mandiri, cod)" },
+        "paymentStatus": { "type": "string", "enum": ["menunggu", "lunas", "batal"], "description": "Payment verification state" },
+        "subtotal": { "type": "number", "description": "Order subtotal in IDR" },
+        "shippingCost": { "type": "number", "description": "Delivery shipping fee" },
+        "totalAmount": { "type": "number", "description": "Total payment amount" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Order creation date" }
+      },
+      "required": ["id", "customerName", "customerPhone", "paymentStatus", "totalAmount"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Laptop sparepart product item with stock and warranty specs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique product ID" },
+        "name": { "type": "string", "description": "Full product name" },
+        "category": { "type": "string", "description": "Category (baterai, charger, keyboard, lcd, ram, ssd, fan)" },
+        "brand": { "type": "string", "description": "Compatible laptop brand or universal" },
+        "partNumber": { "type": "string", "description": "Official part number code" },
+        "price": { "type": "number", "description": "Price in Rupiah" },
+        "originalPrice": { "type": "number", "description": "Optional regular price before discount" },
+        "stock": { "type": "number", "description": "Available inventory quantity" },
+        "condition": { "type": "string", "description": "Original Baru / Refurbished Grade A" },
+        "warrantyMonths": { "type": "number", "description": "Warranty duration in months" },
+        "image": { "type": "string", "description": "Product photo URL" }
+      },
+      "required": ["id", "name", "category", "brand", "price", "stock", "warrantyMonths"]
+    },
+    "StoreBranch": {
+      "title": "StoreBranch",
+      "description": "Physical branch store address, operational hours, and Google Maps info",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Branch identifier" },
+        "city": { "type": "string", "description": "City name (Semarang, Solo, Madiun, Yogyakarta)" },
+        "mallName": { "type": "string", "description": "Store location / building name" },
+        "address": { "type": "string", "description": "Full street address" },
+        "operationalHours": { "type": "string", "description": "Operating schedule" },
+        "phone": { "type": "string", "description": "Store phone number" },
+        "whatsapp": { "type": "string", "description": "Branch WhatsApp consultation" },
+        "googleMapsUrl": { "type": "string", "description": "Google Maps link" }
+      },
+      "required": ["id", "city", "mallName", "address"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Customizable website content, theme, banners, and contacts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Settings document ID, e.g. general" },
+        "storeName": { "type": "string", "description": "Official store brand name" },
+        "tagline": { "type": "string", "description": "Store tagline" },
+        "theme": { "type": "string", "description": "Serialized theme settings JSON" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last updated timestamp" }
+      },
+      "required": ["id", "storeName"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Authenticated user profiles"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/OrderInvoice" },
+      "description": "Customer order records and invoices"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Sparepart catalog items"
+    },
+    "/branches/{branchId}": {
+      "schema": { "$ref": "#/entities/StoreBranch" },
+      "description": "Physical branch stores"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/StoreSettings" },
+      "description": "Global store settings and branding"
+    }
+  }
+}

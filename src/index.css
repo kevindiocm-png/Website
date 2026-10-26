@@ -1,0 +1,476 @@
+@import "tailwindcss";
+
+:root {
+  --theme-primary: #f59e0b;
+  --theme-primary-hover: #fbbf24;
+  --theme-primary-text: #020617;
+  --theme-primary-light: rgba(245, 158, 11, 0.15);
+  --theme-primary-border: rgba(245, 158, 11, 0.35);
+  --theme-primary-glow: rgba(245, 158, 11, 0.35);
+}
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  code, kbd, samp, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+}
+
+/* Dynamic Global Theme Mapping - Transform Amber to Dynamic Primary Color */
+.text-amber-300,
+.text-amber-400,
+.text-amber-500 {
+  color: var(--theme-primary) !important;
+}
+
+.bg-amber-400,
+.bg-amber-500 {
+  background-color: var(--theme-primary) !important;
+  color: var(--theme-primary-text) !important;
+}
+
+.bg-amber-300 {
+  background-color: var(--theme-primary-hover) !important;
+  color: var(--theme-primary-text) !important;
+}
+
+.hover\:bg-amber-300:hover,
+.hover\:bg-amber-400:hover {
+  background-color: var(--theme-primary-hover) !important;
+  color: var(--theme-primary-text) !important;
+}
+
+.hover\:text-amber-300:hover,
+.hover\:text-amber-400:hover {
+  color: var(--theme-primary-hover) !important;
+}
+
+.border-amber-400,
+.border-amber-500,
+.border-amber-400\/40,
+.border-amber-400\/30,
+.border-amber-400\/20,
+.border-amber-500\/40,
+.border-amber-500\/30,
+.border-amber-500\/20 {
+  border-color: var(--theme-primary-border) !important;
+}
+
+.bg-amber-400\/10,
+.bg-amber-500\/10,
+.bg-amber-400\/15,
+.bg-amber-400\/20,
+.bg-amber-500\/20,
+.hover\:bg-amber-400\/20:hover,
+.hover\:bg-amber-400\/30:hover {
+  background-color: var(--theme-primary-light) !important;
+  color: var(--theme-primary) !important;
+}
+
+.focus\:border-amber-400:focus,
+.focus\:border-amber-500:focus {
+  border-color: var(--theme-primary) !important;
+}
+
+.focus\:ring-amber-500\/50:focus {
+  --tw-ring-color: var(--theme-primary-border) !important;
+}
+
+/* Gradient highlight titles and dynamic highlight system */
+.from-amber-300,
+.from-amber-400 {
+  --tw-gradient-from: var(--theme-highlight-secondary, #fbbf24) var(--tw-gradient-from-position) !important;
+}
+
+.via-amber-400 {
+  --tw-gradient-via: var(--theme-highlight, #f59e0b) var(--tw-gradient-via-position) !important;
+}
+
+.to-amber-500 {
+  --tw-gradient-to: var(--theme-highlight, #d97706) var(--tw-gradient-to-position) !important;
+}
+
+/* Odoo-style Dynamic Text Highlight Styles */
+.highlight-text {
+  display: inline;
+  transition: all 0.25s ease;
+}
+
+/* 1. Gradient Style */
+html[data-theme-highlight-style="gradient"] .highlight-text,
+.highlight-text-gradient {
+  background: linear-gradient(135deg, var(--theme-highlight, #f59e0b) 0%, var(--theme-highlight-secondary, #fbbf24) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+/* 2. Solid Style */
+html[data-theme-highlight-style="solid"] .highlight-text,
+.highlight-text-solid {
+  color: var(--theme-highlight, #f59e0b) !important;
+  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  font-weight: 800;
+}
+
+/* 3. Neon Cyber Glow */
+html[data-theme-highlight-style="glow"] .highlight-text,
+.highlight-text-glow {
+  color: var(--theme-highlight, #f59e0b) !important;
+  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  text-shadow: 0 0 10px var(--theme-highlight-glow, rgba(245, 158, 11, 0.6)), 0 0 25px var(--theme-highlight-glow, rgba(245, 158, 11, 0.4));
+  font-weight: 800;
+}
+
+/* 4. Stabilo Highlighter Pen (Ala Odoo Website Builder) */
+html[data-theme-highlight-style="marker"] .highlight-text,
+.highlight-text-marker {
+  color: #ffffff !important;
+  -webkit-text-fill-color: initial !important;
+  background-color: var(--theme-highlight-marker, rgba(245, 158, 11, 0.28)) !important;
+  border-bottom: 2.5px solid var(--theme-highlight, #f59e0b);
+  padding: 1px 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px var(--theme-highlight-marker, rgba(245, 158, 11, 0.2));
+  display: inline;
+}
+
+/* 5. Underline Accent Wave */
+html[data-theme-highlight-style="underline"] .highlight-text,
+.highlight-text-underline {
+  color: var(--theme-highlight, #f59e0b) !important;
+  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--theme-highlight, #f59e0b) !important;
+  text-underline-offset: 6px !important;
+  text-decoration-thickness: 3px !important;
+}
+
+/* Odoo Visual Editor Hover Box */
+.odoo-editable-block {
+  position: relative;
+  transition: outline 0.15s ease, box-shadow 0.15s ease;
+}
+
+.odoo-editable-block:hover {
+  outline: 2px dashed var(--theme-primary, #f59e0b);
+  outline-offset: -2px;
+}
+
+/* Dynamic Background and Card Customization - System-Wide Authoritative */
+html,
+html body {
+  background-color: var(--theme-bg-custom, #020617) !important;
+  color: var(--theme-text-custom, #ffffff);
+}
+
+.bg-slate-950 {
+  background-color: var(--theme-bg-custom, #020617) !important;
+}
+
+.bg-slate-900 {
+  background-color: var(--theme-card-custom, #0f172a) !important;
+}
+
+.bg-slate-900\/50,
+.bg-slate-900\/60,
+.bg-slate-900\/70,
+.bg-slate-900\/80,
+.bg-slate-900\/90,
+.bg-slate-900\/95 {
+  background-color: var(--theme-card-custom, #0f172a) !important;
+}
+
+.bg-slate-950\/50,
+.bg-slate-950\/60,
+.bg-slate-950\/70,
+.bg-slate-950\/80,
+.bg-slate-950\/90 {
+  background-color: var(--theme-bg-custom, #020617) !important;
+}
+
+.border-slate-800,
+.border-slate-850,
+.border-slate-700\/80 {
+  border-color: var(--theme-border-custom, rgba(255, 255, 255, 0.12)) !important;
+}
+
+/* High Contrast Mode - Menjamin 100% Teks Terlihat Jelas & Tajam */
+html[data-theme-high-contrast="true"] .text-slate-400,
+html[data-theme-high-contrast="true"] .text-slate-500 {
+  color: #f1f5f9 !important;
+  font-weight: 500 !important;
+}
+
+html[data-theme-high-contrast="true"] .text-slate-300,
+html[data-theme-high-contrast="true"] .text-slate-200 {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme-high-contrast="true"] .border-slate-800,
+html[data-theme-high-contrast="true"] .border-slate-700 {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Light & Cream modes text color inversion */
+html[data-theme-mode="light"] :not(header):not(nav):not(button):not(.keep-white).text-white,
+html[data-theme-mode="cream"] :not(header):not(nav):not(button):not(.keep-white).text-white {
+  color: #0f172a !important;
+}
+
+html[data-theme-mode="light"] .text-slate-300,
+html[data-theme-mode="light"] .text-slate-200,
+html[data-theme-mode="cream"] .text-slate-300,
+html[data-theme-mode="cream"] .text-slate-200 {
+  color: #334155 !important;
+}
+
+html[data-theme-mode="light"] .text-slate-400,
+html[data-theme-mode="light"] .text-slate-500,
+html[data-theme-mode="cream"] .text-slate-400,
+html[data-theme-mode="cream"] .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Light mode high contrast */
+html[data-theme-mode="light"][data-theme-high-contrast="true"] .text-slate-400,
+html[data-theme-mode="light"][data-theme-high-contrast="true"] .text-slate-500,
+html[data-theme-mode="cream"][data-theme-high-contrast="true"] .text-slate-400,
+html[data-theme-mode="cream"][data-theme-high-contrast="true"] .text-slate-500 {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme-mode="light"][data-theme-high-contrast="true"] .text-slate-600,
+html[data-theme-mode="light"][data-theme-high-contrast="true"] .text-slate-700,
+html[data-theme-mode="cream"][data-theme-high-contrast="true"] .text-slate-600,
+html[data-theme-mode="cream"][data-theme-high-contrast="true"] .text-slate-700 {
+  color: #020617 !important;
+  font-weight: 700 !important;
+}
+
+/* Explicit Brand Wordmark Name Color */
+.brand-wordmark-title {
+  color: var(--theme-brand-name, #ffffff) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme-mode="light"] .text-slate-300,
+html[data-theme-mode="light"] .text-slate-200 {
+  color: #334155 !important;
+}
+
+html[data-theme-mode="light"] .text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Typography styles */
+html[data-theme-font="mono"] * {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace !important;
+}
+
+html[data-theme-font="geometric"] * {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+html[data-theme-font="serif"] * {
+  font-family: Georgia, Cambria, 'Times New Roman', serif !important;
+}
+
+/* Radius styles */
+html[data-theme-radius="sharp"] *,
+html[data-theme-radius="sharp"] button,
+html[data-theme-radius="sharp"] input,
+html[data-theme-radius="sharp"] .rounded-xl,
+html[data-theme-radius="sharp"] .rounded-2xl,
+html[data-theme-radius="sharp"] .rounded-lg {
+  border-radius: 0px !important;
+}
+
+html[data-theme-radius="soft"] .rounded-xl,
+html[data-theme-radius="soft"] .rounded-lg {
+  border-radius: 1.25rem !important;
+}
+
+html[data-theme-radius="pill"] button:not(.btn-no-pill),
+html[data-theme-radius="pill"] .btn-pill,
+html[data-theme-radius="pill"] input {
+  border-radius: 9999px !important;
+}
+
+/* Odoo Live Website Builder Visual Frame */
+.odoo-editable-block {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.odoo-editable-block:hover {
+  outline: 2px dashed rgba(6, 182, 212, 0.7);
+  outline-offset: -3px;
+}
+
+/* ==========================================================================
+   PRINT STYLESHEET - Single Page Official Invoice / Nota Kevin 88
+   Ensures ONLY the invoice modal content is printed and fits on 1 page (A4)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  /* Reset body and document for clean crisp printing */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force hide all standard page sections, headers, footers, aside, banners and widgets */
+  header,
+  nav,
+  main,
+  footer,
+  aside,
+  .print\:hidden,
+  .no-print,
+  #app-main-content,
+  #banner-announcement,
+  #navbar-header,
+  #website-footer,
+  #admin-status-bar,
+  #odoo-builder-drawer,
+  #whatsapp-floating-btn {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+  }
+
+  /* Hide any other open background modals */
+  [role="dialog"]:not(#invoice-modal-overlay),
+  .toast-notification-container {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Invoice modal full print reset */
+  #invoice-modal-overlay {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    overflow: visible !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    inset: auto !important;
+  }
+
+  #invoice-printable-card {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  #invoice-print-sheet {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    overflow: visible !important;
+  }
+
+  /* Prevent awkward page breaks inside sections and table rows */
+  .print-avoid-break,
+  tr,
+  td,
+  th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Ensure text colors are crisp and readable */
+  .text-white {
+    color: #0f172a !important;
+  }
+}
+
+/* QRIS Scanner & Processing Animations */
+@keyframes qris-scan-line {
+  0% {
+    top: 2%;
+    opacity: 0.6;
+  }
+  50% {
+    top: 96%;
+    opacity: 1;
+  }
+  100% {
+    top: 2%;
+    opacity: 0.6;
+  }
+}
+
+.animate-qris-scan-line {
+  animation: qris-scan-line 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.96);
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s ease-in-out infinite;
+}
+
